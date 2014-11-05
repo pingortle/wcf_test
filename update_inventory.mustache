@@ -1,0 +1,66 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:urn="urn:toatech:InboundInterface:1.0">
+  <soapenv:Header/>
+  <soapenv:Body>
+    <urn:inbound_interface_request>
+      {{! You may enter the following 3 items in any order }}
+
+      {{#user}}
+      <user>
+        <now>{{now}}</now>
+        <login>{{login}}</login>
+        <company>{{company}}</company>
+        <auth_string>{{auth_string}}</auth_string>
+      </user>
+      {{/user}}
+
+      {{#head}}
+      <head>
+        <upload_type>incremental</upload_type>
+        <id>{{id}}</id>
+        <appointment>
+          <keys>
+            <field>appt_number</field>
+          </keys>
+        </appointment>
+        <inventory>
+          <keys>
+            <field>invtype_label</field>
+          </keys>
+        </inventory>
+      </head>
+      {{/head}}
+
+      {{#data}}
+      <data>
+        {{#commands}}
+        <commands>
+          <command>
+            {{! adds inventory to resource pool }}
+            <date>{{date}}</date>
+            <type>update_inventory</type>
+            <external_id>{{external_id}}</external_id>
+            {{#inventories}}
+            <inventories>
+              <inventory>
+                <properties>
+                  <property>
+                    <label>invsn</label>
+                    {{! serial number property }}
+                    <value>{{invsn}}</value>
+                  </property>
+                  <property>
+                    <label>invtype_label</label>
+                    <value>{{invtype_label}}</value>
+                  </property>
+                </properties>
+              </inventory>
+            </inventories>
+            {{#inventories}}
+          </command>
+        </commands>
+        {{/commands}}
+      </data>
+      {{/data}}
+    </urn:inbound_interface_request>
+  </soapenv:Body>
+</soapenv:Envelope>

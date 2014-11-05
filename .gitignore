@@ -2,7 +2,13 @@
 # Generated files
 tmp
 
+# Don't commit sensitive info.
+config.json
+
 # *** Other *** #
+
+# Sublime Workspace
+*.sublime-workspace
 
 # Logs
 logs
