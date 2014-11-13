@@ -51,7 +51,7 @@ soap.createClient(config.wsdl, function(e, client) {
     }
   }, function(e, result) {
     var dir = process.cwd();
-    process.chdir('./tmp')
+    process.chdir('./tmp');
     fs.writeFileSync('./error.json', JSON.stringify(e, null, 2));
     fs.writeFileSync('./response.json', JSON.stringify(result, null, 2));
     process.chdir(dir);
