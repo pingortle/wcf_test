@@ -19,35 +19,47 @@ soap.createClient(config.wsdl, function(e, client) {
       upload_type: 'incremental',
       id: "IB2014.11.03",
       appointment: {
-        keys: ['appt_number']
+        keys: {
+          field: ['appt_number']
+        }
       },
       inventory: {
-        keys: ['invtype_label']
+        keys: {
+          field: ['invtype_label']
+        }
       }
     },
     data: {
-      commands: [{
-        date: "2014-11-04",
-        type: "update_inventory",
-        external_id: "55015",
-        inventories: [{
-          properties: [{
-            label: "invsn",
-            value: "12456ABC_9$%^"
-          }, {
-            label: "invtype_label",
-            value: "AT"
-          }]
-        }, {
-        properties: [{
-            label: "invtype_label",
-            value: "HD12"
-          }, {
-            label: "quantity",
-            value: "2"
-          }]
+      commands: {
+        command: [{
+          date: "2014-11-04",
+          type: "update_inventory",
+          external_id: "55015",
+          inventories: {
+            inventory: [{
+              properties: {
+                property: [{
+                    label: "invsn",
+                    value: "12456ABC_9$%^"
+                  }, {
+                    label: "invtype_label",
+                    value: "AT"
+                }]
+              }
+            }, {
+              properties: {
+                property: [{
+                  label: "invtype_label",
+                  value: "HD12"
+                }, {
+                  label: "quantity",
+                  value: "2"
+                }]
+              }
+            }]
+          }
         }]
-      }]
+      }
     }
   }, function(e, result) {
     var dir = process.cwd();
